@@ -7,7 +7,7 @@ import time
 load_dotenv()
 
 my_api_key = os.getenv("GROQ_API_KEY")
-access_token = os.getenv("HF_TOKEN")
+
 
 
 
@@ -52,7 +52,7 @@ class ChatBot:
         early_messages, last_messages = (other_messages[0:5],other_messages[5:])
         response = self.client.chat.completions.create(
                 model="openai/gpt-oss-20b",
-                temperature = 0.5
+                temperature = 0.5,
                 messages=[{"role": "system", "content":"Summarize thses messages concisely, keeping key facts and decisions."}
                           ,*early_messages])
         summarized_message = {"role": "system","content":f"""This is summary of five early messages:{response.choices[0].message.content}"""}
